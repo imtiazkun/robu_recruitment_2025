@@ -29,9 +29,14 @@ const formSchema = z.object({
   phone: z.string().min(2).max(11),
   gender: z.string(),
   email: z.string().email(),
+  gsuite_email: z.string().email(),
+  address: z.string(),
   dateOfBirth: z.string().date(),
   prefered_department: z.string(),
+
   blood_group: z.string(),
+  hobbies: z.string(),
+
   joined_bracu: z.string(),
   rs_batch: z.string(),
   facebook_profile: z
@@ -51,13 +56,17 @@ function App() {
     defaultValues: {
       name: "",
       id: "",
-      phone: "",
-      gender: "male",
+      joined_bracu: "",
+
+      gsuite_email: "",
       email: "",
+      phone: "",
+      address: "",
+
+      gender: "male",
       dateOfBirth: "",
       prefered_department: "IT",
       blood_group: "O+",
-      joined_bracu: "",
       rs_batch: "N/A",
       facebook_profile: "",
       linkedin_profile: "",
@@ -68,14 +77,49 @@ function App() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
 
-    fetch("", {
+    fetch("https://api.traction.bracurobu.com/api/applicants", {
       method: "POST",
-      body: JSON.stringify({}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        student_id: values.id,
+        name: values.name,
+        semester: values.joined_bracu,
+
+        personal_email: values.email,
+        bracu_email: values.gsuite_email,
+        mobile: values.phone,
+        address: values.address,
+
+        bio:
+          "Form Generated: \nHobbies: " +
+          values.hobbies +
+          "\nBlood Group:" +
+          values.blood_group,
+
+        date_of_birth: values.dateOfBirth,
+        gender: values.gender,
+
+        rs: values.rs_batch,
+        preferred_departments: [values.prefered_department],
+
+        github_profile_link:
+          values.portfolio_link == "" ? null : values.portfolio_link,
+        linkedin_profile_link:
+          values.linkedin_profile == "" ? null : values.linkedin_profile,
+        facebook_profile_link:
+          values.facebook_profile == "" ? null : values.facebook_profile,
+      }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status == 200) {
+          setIsSubmitted(true);
+        }
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
-        setIsSubmitted(true);
       })
       .catch((error) => {
         console.error(error);
@@ -143,6 +187,24 @@ function App() {
 
               <FormField
                 control={form.control}
+                name="gsuite_email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>BRACU Gsuite Mail</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="someone@gmail.com"
+                        {...field}
+                        type="email"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
@@ -153,6 +215,24 @@ function App() {
                         {...field}
                         maxLength={11}
                         type="tel"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Address</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="018XXXXXXXX"
+                        {...field}
+                        maxLength={11}
                       />
                     </FormControl>
                     <FormMessage />
@@ -174,7 +254,7 @@ function App() {
                 )}
               />
 
-              <div className="flex flex-col lg:flex-row gap-2 w-full">
+              <div className="flex flex-col lg:flex-row gap-8 lg:gap-2 w-full">
                 <FormField
                   control={form.control}
                   name="gender"
@@ -233,7 +313,7 @@ function App() {
                 />
               </div>
 
-              <div className="flex flex-col lg:flex-row gap-2 w-full">
+              <div className="flex flex-col lg:flex-row gap-8 lg:gap-2 w-full">
                 <FormField
                   control={form.control}
                   name="joined_bracu"
@@ -376,6 +456,28 @@ function App() {
                         placeholder="https://bracurobu.com/"
                         {...field}
                         type="url"
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Link to your GitHub, Dribble, Behance or any other
+                      portfolio.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="hobbies"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Hobbies</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Reading, Writing, Coding, etc."
+                        {...field}
+                        type="text"
                       />
                     </FormControl>
                     <FormMessage />
