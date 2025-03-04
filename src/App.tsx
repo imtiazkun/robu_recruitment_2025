@@ -25,7 +25,7 @@ import { useState } from "react";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required.").max(100),
-  id: z.string().min(8).max(8),
+  id: z.string().min(8).max(10),
   phone: z.string().min(2).max(11),
   gender: z.string(),
   email: z.string().email(),
@@ -160,7 +160,7 @@ function App() {
                   <FormItem>
                     <FormLabel>Id</FormLabel>
                     <FormControl>
-                      <Input placeholder="23201XXX" {...field} maxLength={8} />
+                      <Input placeholder="23201XXX" {...field} maxLength={10} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
