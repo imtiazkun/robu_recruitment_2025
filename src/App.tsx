@@ -68,15 +68,19 @@ function App() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
 
-    // fetch("https://bracurobu.com/api/register", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(values),
-    // });
-
-    setIsSubmitted(true);
+    fetch("", {
+      method: "POST",
+      body: JSON.stringify({}),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setIsSubmitted(true);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to submit the form. Please try again later.");
+      });
   }
 
   return (
@@ -95,7 +99,7 @@ function App() {
                   <FormItem>
                     <FormLabel>Full name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Naruto Uzumaki" {...field} />
+                      <Input placeholder="" {...field} />
                     </FormControl>
                     <FormDescription>
                       According to your University ID card.
@@ -127,7 +131,7 @@ function App() {
                     <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="uzumaki.naruto@gmail.com"
+                        placeholder="someone@gmail.com"
                         {...field}
                         type="email"
                       />
@@ -385,9 +389,7 @@ function App() {
         </div>
       ) : (
         <div className="container mx-auto px-5 lg:px-20 py-10">
-          <h1 className="text-4xl font-bold mb-2">
-            Successfully Registered.
-          </h1>
+          <h1 className="text-4xl font-bold mb-2">Successfully Registered.</h1>
           <p className="text-gray-500">
             We have received your application. You'll be notified soon.
           </p>
