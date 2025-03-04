@@ -230,9 +230,9 @@ function App() {
                     <FormLabel>Address</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="018XXXXXXXX"
+                        placeholder="B/A, Road 1, Block A, Mirpur 1"
+                        type="text"
                         {...field}
-                        maxLength={11}
                       />
                     </FormControl>
                     <FormMessage />
