@@ -33,6 +33,7 @@ const formSchema = z.object({
   address: z.string(),
   dateOfBirth: z.string().date(),
   prefered_department: z.string(),
+  prefered_department2: z.string(),
 
   blood_group: z.string(),
   hobbies: z.string(),
@@ -66,6 +67,7 @@ function App() {
       gender: "male",
       dateOfBirth: "",
       prefered_department: "IT",
+      prefered_department2: "",
       blood_group: "O+",
       rs_batch: "N/A",
       facebook_profile: "",
@@ -102,7 +104,7 @@ function App() {
         gender: values.gender,
 
         rs: values.rs_batch,
-        preferred_departments: [values.prefered_department],
+        preferred_departments: [values.prefered_department, values.prefered_department2],
 
         github_profile_link:
           values.portfolio_link == "" ? null : values.portfolio_link,
@@ -378,6 +380,43 @@ function App() {
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormLabel>Preferred Department</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {[
+                          "IT",
+                          "Arts & Design",
+                          "Editorial & Publications",
+                          "Finance & Marketing",
+                          "Event Management",
+                          "Research & Project Management",
+                          "Strategic Planning",
+                          "Human Resources",
+                        ].map((department) => (
+                          <SelectItem key={department} value={department}>
+                            {department}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="prefered_department2"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>2nd Preferred Department</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
