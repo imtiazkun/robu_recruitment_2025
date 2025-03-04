@@ -66,8 +66,15 @@ function App() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    console.log(values);
+
+    // fetch("https://bracurobu.com/api/register", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(values),
+    // });
 
     setIsSubmitted(true);
   }
