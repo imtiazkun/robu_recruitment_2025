@@ -52,4 +52,3 @@ export default tseslint.config({
   },
 })
 ```
-# robu_recruitment_2025
