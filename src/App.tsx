@@ -66,7 +66,7 @@ function App() {
 
       gender: "male",
       dateOfBirth: "",
-      prefered_department: "IT",
+      prefered_department: "",
       prefered_department2: "",
       blood_group: "O+",
       rs_batch: "N/A",
