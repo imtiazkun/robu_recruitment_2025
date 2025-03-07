@@ -398,7 +398,6 @@ function App() {
                           "Event Management",
                           "Research & Project Management",
                           "Strategic Planning",
-                          "Human Resources",
                         ].map((department) => (
                           <SelectItem key={department} value={department}>
                             {department}
@@ -435,7 +434,6 @@ function App() {
                           "Event Management",
                           "Research & Project Management",
                           "Strategic Planning",
-                          "Human Resources",
                         ].map((department) => (
                           <SelectItem key={department} value={department}>
                             {department}
