@@ -187,7 +187,7 @@ export default function Dashboard() {
         </CardContent>
       </Card>
 
-      <div className="flex items-center justify-between ">
+      <div className="flex items-center justify-between lg:flex-row flex-col ">
         <div className="flex items-center py-4">
           <Input
             placeholder="Filter emails..."
@@ -200,7 +200,7 @@ export default function Dashboard() {
                 .getColumn("personal_email")
                 ?.setFilterValue(event.target.value)
             }
-            className="max-w-sm"
+            className="max-w-full lg:max-w-sm "
           />
         </div>
         <div className="flex items-center justify-end space-x-4 py-4">
