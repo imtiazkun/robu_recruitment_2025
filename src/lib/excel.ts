@@ -1,7 +1,8 @@
 // excelUtils.js
 import xlsx from 'node-xlsx';
 
-export const downloadExcelFromJson = (jsonData, fileName = 'students.xlsx') => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const downloadExcelFromJson = (jsonData: any[], fileName = 'students.xlsx') => {
   if (!jsonData || !jsonData.length) {
     console.error('No data provided for Excel export.');
     return;
@@ -18,7 +19,8 @@ export const downloadExcelFromJson = (jsonData, fileName = 'students.xlsx') => {
     headers, // header row
     ...jsonData.map(item =>
       headers.map(header => {
-        let value = item[header] ?? '';
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const value = (item as Record<string, any>)[header as string] ?? '';
         if (Array.isArray(value)) {
           return value.join(', ');
         }
@@ -28,7 +30,7 @@ export const downloadExcelFromJson = (jsonData, fileName = 'students.xlsx') => {
   ];
 
   // Build the Excel file using node-xlsx.
-  const buffer = xlsx.build([{ name: 'Students', data }]);
+  const buffer = xlsx.build([{ name: 'Students', data, options: {} }]);
 
   // Create a blob from the buffer and trigger a download.
   const blob = new Blob([buffer], { type: 'application/octet-stream' });
