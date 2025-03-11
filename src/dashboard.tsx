@@ -30,6 +30,7 @@ import {
 import { Button } from "./components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { Input } from "./components/ui/input";
+import { downloadExcelFromJson } from "./lib/excel";
 
 export interface Applicant {
   student_id: string;
@@ -173,6 +174,24 @@ export default function Dashboard() {
       });
   }, [page]);
 
+  const DownloadExcel = () => {
+    fetch(`${REST}/applicants?page=${page}&per_page=1000`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401) {
+          window.location.href = "/login";
+        }
+
+        return res.json();
+      })
+      .then((data) => {
+        downloadExcelFromJson(data.items, "applicants.xlsx");
+      });
+  };
+
   return (
     <div className="container mx-auto p-8 space-y-8">
       <Card>
@@ -183,7 +202,7 @@ export default function Dashboard() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Button>Download as .xlsx</Button>
+          <Button onClick={() => DownloadExcel()}>Download as .xlsx</Button>
         </CardContent>
       </Card>
 
