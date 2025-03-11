@@ -1,5 +1,6 @@
+import Closed from "./closed";
 import Dashboard from "./dashboard";
-import FormPage from "./form"
+// import FormPage from "./form"
 import Login from "./login";
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
             return <Dashboard />
             break;
         default:
-            return <FormPage />
+            return <Closed />
             break;
     }
 }
