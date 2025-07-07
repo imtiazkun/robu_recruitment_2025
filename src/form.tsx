@@ -75,18 +75,19 @@ function FormPage() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch(`${REST}/applicants`, {
+    fetch(`${REST}/api/registrations`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        student_id: values.id,
+        studentId: values.id,
         name: values.name,
         semester: values.joined_bracu,
+        program: "Other",
 
-        personal_email: values.email,
-        bracu_email: values.gsuite_email,
+        personalEmail: values.email,
+        orgEmail: values.gsuite_email,
         mobile: values.phone,
         address: values.address,
 
@@ -96,21 +97,22 @@ function FormPage() {
           "\nBlood Group:" +
           values.blood_group,
 
-        date_of_birth: values.dateOfBirth,
+        dateOfBirth: values.dateOfBirth,
         gender: values.gender,
 
-        rs: values.rs_batch,
-        preferred_departments: [
+        residentialSemester: values.rs_batch,
+        preferredDepartments: [
           values.prefered_department,
           values.prefered_department2,
         ],
 
-        github_profile_link:
+        githubProfileLink:
           values.portfolio_link == "" ? null : values.portfolio_link,
-        linkedin_profile_link:
+        linkedInProfileLink:
           values.linkedin_profile == "" ? null : values.linkedin_profile,
-        facebook_profile_link:
+        facebookProfileLink:
           values.facebook_profile == "" ? null : values.facebook_profile,
+        instagramProfileLink: ""
       }),
     })
       .then((res) => {
@@ -132,9 +134,15 @@ function FormPage() {
     <div className="w-full">
       {!isSubmitted ? (
         <div className="container mx-auto px-5 lg:px-20 pt-20">
-          <h1 className="text-4xl font-bold mb-8">
-            BRACU ROBU Recruitment Spring 2025
-          </h1>
+          <div className="mb-12 uppercase">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight xl:leading-[5rem]">
+              Robotics Club of BRAC University
+            </h1>
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+              Recruitment Summer 2025
+            </h2>
+
+          </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
@@ -537,7 +545,7 @@ function FormPage() {
       <footer>
         <div className="container mx-auto px-5 lg:px-20">
           <p className="text-gray-500 py-10">
-            Crafted by insomniacs from BRACU ROBU Web Dev Team 💤.
+            Crafted by insomniacs from BRACU ROBU DEV Team 💤.
           </p>
         </div>
       </footer>
