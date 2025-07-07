@@ -107,11 +107,11 @@ function FormPage() {
         ],
 
         githubProfileLink:
-          values.portfolio_link == "" ? null : values.portfolio_link,
+          values.portfolio_link,
         linkedInProfileLink:
-          values.linkedin_profile == "" ? null : values.linkedin_profile,
+          values.linkedin_profile,
         facebookProfileLink:
-          values.facebook_profile == "" ? null : values.facebook_profile,
+          values.facebook_profile,
       }),
     })
       .then((res) => {
