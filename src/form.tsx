@@ -112,12 +112,13 @@ function FormPage() {
           values.linkedin_profile == "" ? null : values.linkedin_profile,
         facebookProfileLink:
           values.facebook_profile == "" ? null : values.facebook_profile,
-        instagramProfileLink: ""
       }),
     })
       .then((res) => {
-        if (res.status == 200) {
+        if (res.status == 201) {
           setIsSubmitted(true);
+        } else {
+          alert("Failed to submit the form. Please try again later.");
         }
         return res.json();
       })

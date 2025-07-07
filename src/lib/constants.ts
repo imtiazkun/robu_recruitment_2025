@@ -1,4 +1,4 @@
-const BASE = "http://api.reg.bracurobu.com/"
-const REST = `${BASE}/api`
+const BASE = "https://api.reg.bracurobu.com"
+const REST = `${BASE}`
 
 export { BASE, REST }
