@@ -69,8 +69,8 @@ function FormPage() {
       blood_group: "O+",
       rs_batch: "N/A",
       facebook_profile: "",
-      linkedin_profile: "",
-      portfolio_link: "",
+      linkedin_profile: "https://www.linkedin.com",
+      portfolio_link: "https://www.google.com",
     },
   });
 
