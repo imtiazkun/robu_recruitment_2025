@@ -406,6 +406,7 @@ function FormPage() {
                           "Event Management",
                           "Research & Project Management",
                           "Strategic Planning",
+                          "Human Resources",
                         ].map((department) => (
                           <SelectItem key={department} value={department}>
                             {department}
@@ -442,6 +443,7 @@ function FormPage() {
                           "Event Management",
                           "Research & Project Management",
                           "Strategic Planning",
+                          "Human Resources",
                         ].map((department) => (
                           <SelectItem key={department} value={department}>
                             {department}
